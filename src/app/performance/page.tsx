@@ -8,6 +8,13 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
   getEmployeePerformance,
   getPerformanceStats,
   getEmployeeGoals,
@@ -96,18 +103,18 @@ export default function PerformancePage() {
         </div>
         {isAdmin && (
           <div className="flex gap-4">
-            <select
-              className="border rounded-md p-2"
-              value={selectedEmployee}
-              onChange={(e) => setSelectedEmployee(e.target.value)}
-            >
-              <option value="">Select Employee</option>
-              {employees.map((emp: Employee) => (
-                <option key={emp.id} value={emp.id}>
-                  {emp.name}
-                </option>
-              ))}
-            </select>
+            <Select value={selectedEmployee} onValueChange={setSelectedEmployee}>
+              <SelectTrigger className="w-[200px] bg-background text-foreground">
+                <SelectValue placeholder="Select Employee" />
+              </SelectTrigger>
+              <SelectContent>
+                {employees.map((emp: Employee) => (
+                  <SelectItem key={emp.id} value={emp.id}>
+                    {emp.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
             <Button onClick={() => setIsAddReviewOpen(true)}>Add Review</Button>
             <Button onClick={() => setIsAddGoalOpen(true)}>Add Goal</Button>
           </div>
@@ -211,11 +218,16 @@ export default function PerformancePage() {
           <form onSubmit={handleAddReview} className="space-y-4">
             <div>
               <Label>Type</Label>
-              <select name="type" className="w-full p-2 border rounded-md">
-                <option value="quarterly">Quarterly</option>
-                <option value="annual">Annual</option>
-                <option value="probation">Probation</option>
-              </select>
+              <Select name="type" defaultValue="quarterly">
+                <SelectTrigger className="w-full bg-background text-foreground">
+                  <SelectValue placeholder="Select review type" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="quarterly">Quarterly</SelectItem>
+                  <SelectItem value="annual">Annual</SelectItem>
+                  <SelectItem value="probation">Probation</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
             {["technical", "communication", "teamwork", "leadership", "overall"].map(
               (rating) => (
@@ -271,12 +283,17 @@ export default function PerformancePage() {
             </div>
             <div>
               <Label>Category</Label>
-              <select name="category" className="w-full p-2 border rounded-md">
-                <option value="professional">Professional</option>
-                <option value="personal">Personal</option>
-                <option value="technical">Technical</option>
-                <option value="soft-skills">Soft Skills</option>
-              </select>
+              <Select name="category" defaultValue="professional">
+                <SelectTrigger className="w-full bg-background text-foreground">
+                  <SelectValue placeholder="Select category" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="professional">Professional</SelectItem>
+                  <SelectItem value="personal">Personal</SelectItem>
+                  <SelectItem value="technical">Technical</SelectItem>
+                  <SelectItem value="soft-skills">Soft Skills</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
             <div>
               <Label>Start Date</Label>

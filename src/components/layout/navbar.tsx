@@ -9,6 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { NotificationsMenu } from "@/components/notifications-menu";
 import { useRouter } from "next/navigation";
 
 export default function Navbar() {
@@ -28,41 +29,44 @@ export default function Navbar() {
         </div>
         <div className="ml-auto flex items-center gap-4">
           {user && (
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button 
-                  variant="ghost" 
-                  className="relative h-10 w-10 rounded-full border border-slate-800 bg-slate-900 hover:bg-slate-800"
+            <>
+              <NotificationsMenu />
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button 
+                    variant="ghost" 
+                    className="relative h-10 w-10 rounded-full border border-slate-800 bg-slate-900 hover:bg-slate-800"
+                  >
+                    <Avatar className="h-9 w-9 transition-transform hover:scale-105">
+                      <AvatarFallback className="border border-slate-700 bg-gradient-to-br from-indigo-600 to-purple-600 text-sm font-medium text-white">
+                        {user.name
+                          .split(" ")
+                          .map((n) => n[0])
+                          .join("")}
+                      </AvatarFallback>
+                    </Avatar>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent 
+                  className="w-56 border border-slate-800 bg-slate-900 text-slate-300" 
+                  align="end" 
+                  forceMount
                 >
-                  <Avatar className="h-9 w-9 transition-transform hover:scale-105">
-                    <AvatarFallback className="border border-slate-700 bg-gradient-to-br from-indigo-600 to-purple-600 text-sm font-medium text-white">
-                      {user.name
-                        .split(" ")
-                        .map((n) => n[0])
-                        .join("")}
-                    </AvatarFallback>
-                  </Avatar>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent 
-                className="w-56 border border-slate-800 bg-slate-900 text-slate-300" 
-                align="end" 
-                forceMount
-              >
-                <DropdownMenuItem className="flex-col items-start space-y-1 px-4 py-3 focus:bg-slate-800">
-                  <div className="text-sm font-medium text-slate-200">{user.name}</div>
-                  <div className="text-xs text-slate-400 capitalize">
-                    {user.role}
-                  </div>
-                </DropdownMenuItem>
-                <DropdownMenuItem 
-                  onClick={handleLogout}
-                  className="focus:bg-slate-800 text-red-400 focus:text-red-400"
-                >
-                  Log out
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+                  <DropdownMenuItem className="flex-col items-start space-y-1 px-4 py-3 focus:bg-slate-800">
+                    <div className="text-sm font-medium text-slate-200">{user.name}</div>
+                    <div className="text-xs text-slate-400 capitalize">
+                      {user.role}
+                    </div>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem 
+                    onClick={handleLogout}
+                    className="focus:bg-slate-800 text-red-400 focus:text-red-400"
+                  >
+                    Log out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </>
           )}
         </div>
       </div>

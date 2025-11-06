@@ -21,11 +21,17 @@ export interface Employee extends User {
 export interface EmployeeDocument {
   id: string;
   employeeId: string;
-  type: 'contract' | 'certificate' | 'id' | 'other';
+  type: 'contract' | 'certificate' | 'id' | 'policy' | 'form' | 'report' | 'other';
   title: string;
   url: string;
   expiryDate?: string;
   uploadDate: string;
+  status?: 'active' | 'archived' | 'draft';
+  category?: string;
+  tags?: string[];
+  description?: string;
+  version?: string;
+  accessLevel?: 'all' | 'manager' | 'hr' | 'personal';
 }
 
 export interface LeaveBalance {

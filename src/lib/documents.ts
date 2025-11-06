@@ -2,6 +2,48 @@ import { EmployeeDocument } from "@/types";
 
 const MOCK_DOCUMENTS: EmployeeDocument[] = [
   {
+    id: "5",
+    employeeId: "1",
+    type: "policy",
+    title: "Employee Handbook 2025",
+    url: "/documents/handbook-2025.pdf",
+    uploadDate: "2025-01-01",
+    status: "active",
+    category: "HR Policies",
+    tags: ["handbook", "policy", "guidelines"],
+    description: "Official employee handbook for the year 2025",
+    version: "2.0",
+    accessLevel: "all"
+  },
+  {
+    id: "6",
+    employeeId: "6", // HR Manager
+    type: "policy",
+    title: "Leave Policy",
+    url: "/documents/leave-policy-2025.pdf",
+    uploadDate: "2025-01-01",
+    status: "active",
+    category: "HR Policies",
+    tags: ["leave", "policy", "attendance"],
+    description: "Updated leave policy and guidelines",
+    version: "1.2",
+    accessLevel: "all"
+  },
+  {
+    id: "7",
+    employeeId: "6",
+    type: "form",
+    title: "Performance Review Template",
+    url: "/documents/performance-review-template.pdf",
+    uploadDate: "2025-01-15",
+    status: "active",
+    category: "Forms",
+    tags: ["performance", "review", "template"],
+    description: "Standard performance review form",
+    version: "1.0",
+    accessLevel: "manager"
+  },
+  {
     id: "1",
     employeeId: "1",
     type: "contract",

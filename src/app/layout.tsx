@@ -6,6 +6,11 @@ import Sidebar from "@/components/layout/sidebar";
 import { AuthProvider } from "@/contexts/auth-context";
 import { usePathname } from "next/navigation";
 
+export const metadata = {
+  title: 'HR Management System',
+  description: 'A comprehensive HR management system for modern organizations',
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -16,13 +21,13 @@ export default function RootLayout({
 
   return (
     <html lang="en" className="antialiased">
-      <body className="min-h-screen bg-slate-900 font-sans text-slate-100">
+      <body className="min-h-screen bg-background font-sans text-foreground">
         <AuthProvider>
           {isLoginPage ? (
             children
           ) : (
             <div className="relative flex h-screen overflow-hidden">
-              <div className="hidden w-64 shrink-0 border-r border-slate-800 bg-slate-900/95 backdrop-blur-sm md:flex">
+              <div className="hidden w-64 shrink-0 border-r border-border bg-background/95 backdrop-blur-sm md:flex">
                 <Sidebar />
               </div>
               <div className="flex w-full flex-1 flex-col overflow-hidden bg-[radial-gradient(ellipse_at_top,rgba(93,52,127,0.4),transparent_50%)]">

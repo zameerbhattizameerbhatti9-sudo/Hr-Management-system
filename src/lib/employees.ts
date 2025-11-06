@@ -3,6 +3,101 @@ import { Employee } from "@/types";
 // In a real app, this would be fetched from an API
 export const MOCK_EMPLOYEES: Employee[] = [
   {
+    id: "16",
+    name: "Amanda Foster",
+    email: "amanda.f@example.com",
+    role: "employee",
+    position: "HR Specialist",
+    department: "Human Resources",
+    joinDate: "2023-07-01",
+    salary: 68000,
+    managerId: "6",
+    skills: ["Employee Relations", "Recruitment", "Benefits Administration", "Onboarding"],
+    documents: [],
+    leaveBalance: {
+      annual: 15,
+      sick: 10,
+      personal: 5,
+      carryOver: 0
+    }
+  },
+  {
+    id: "17",
+    name: "Ryan Chang",
+    email: "ryan.c@example.com",
+    role: "employee",
+    position: "Cloud Architect",
+    department: "Engineering",
+    joinDate: "2023-04-15",
+    salary: 115000,
+    managerId: "15",
+    skills: ["AWS", "Azure", "Google Cloud", "Terraform", "Microservices"],
+    documents: [],
+    leaveBalance: {
+      annual: 20,
+      sick: 10,
+      personal: 5,
+      carryOver: 2
+    }
+  },
+  {
+    id: "18",
+    name: "Priya Patel",
+    email: "priya.p@example.com",
+    role: "employee",
+    position: "Data Scientist",
+    department: "Analytics",
+    joinDate: "2023-08-01",
+    salary: 95000,
+    managerId: "6",
+    skills: ["Python", "Machine Learning", "TensorFlow", "SQL", "Data Visualization"],
+    documents: [],
+    leaveBalance: {
+      annual: 15,
+      sick: 10,
+      personal: 5,
+      carryOver: 0
+    }
+  },
+  {
+    id: "19",
+    name: "Marcus Johnson",
+    email: "marcus.j@example.com",
+    role: "employee",
+    position: "Financial Analyst",
+    department: "Finance",
+    joinDate: "2023-06-15",
+    salary: 75000,
+    managerId: "6",
+    skills: ["Financial Modeling", "Excel", "PowerBI", "Risk Analysis"],
+    documents: [],
+    leaveBalance: {
+      annual: 15,
+      sick: 10,
+      personal: 5,
+      carryOver: 0
+    }
+  },
+  {
+    id: "20",
+    name: "Isabella Santos",
+    email: "isabella.s@example.com",
+    role: "employee",
+    position: "Customer Success Manager",
+    department: "Customer Support",
+    joinDate: "2023-05-01",
+    salary: 72000,
+    managerId: "6",
+    skills: ["Customer Relations", "Project Management", "Sales", "Communication"],
+    documents: [],
+    leaveBalance: {
+      annual: 15,
+      sick: 10,
+      personal: 5,
+      carryOver: 1
+    }
+  },
+  {
     id: "1",
     name: "John Doe",
     email: "john@example.com",

@@ -8,6 +8,13 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
   getTrainings,
   getEmployeeTrainings,
   addTraining,
@@ -107,17 +114,21 @@ export default function TrainingPage() {
         </div>
         {isAdmin && (
           <div className="flex gap-4">
-            <select
-              className="border rounded-md p-2"
-              value={selectedStatus || ""}
-              onChange={(e) => setSelectedStatus(e.target.value as any || undefined)}
+            <Select
+              value={selectedStatus}
+              onValueChange={(value) => setSelectedStatus(value as any || undefined)}
             >
-              <option value="">All Status</option>
-              <option value="upcoming">Upcoming</option>
-              <option value="in-progress">In Progress</option>
-              <option value="completed">Completed</option>
-            </select>
-            <Button onClick={() => setIsAddTrainingOpen(true)}>
+              <SelectTrigger className="w-[180px] bg-background text-foreground">
+                <SelectValue placeholder="Filter by status" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Status</SelectItem>
+                <SelectItem value="upcoming">Upcoming</SelectItem>
+                <SelectItem value="in-progress">In Progress</SelectItem>
+                <SelectItem value="completed">Completed</SelectItem>
+              </SelectContent>
+            </Select>
+            <Button onClick={() => setIsAddTrainingOpen(true)} className="bg-primary text-primary-foreground hover:bg-primary/90">
               Add Training
             </Button>
           </div>
@@ -126,38 +137,42 @@ export default function TrainingPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {trainings.map((training) => (
-          <Card key={training.id} className="p-6">
+          <Card key={training.id} className="p-6 bg-card text-card-foreground hover:bg-accent/5 transition-colors">
             <div className="flex justify-between items-start mb-4">
-              <h3 className="font-medium">{training.title}</h3>
-              <span className="px-2 py-1 text-xs rounded-full bg-slate-100 capitalize">
+              <h3 className="text-lg font-semibold text-foreground">{training.title}</h3>
+              <span className={`px-2.5 py-1 text-xs font-medium rounded-full capitalize ${
+                training.status === 'upcoming' ? 'bg-blue-100 text-blue-800' :
+                training.status === 'in-progress' ? 'bg-green-100 text-green-800' :
+                'bg-purple-100 text-purple-800'
+              }`}>
                 {training.status}
               </span>
             </div>
             <p className="text-sm text-muted-foreground mb-4">
               {training.description}
             </p>
-            <div className="space-y-2 text-sm mb-4">
-              <div className="flex justify-between">
-                <span>Type:</span>
-                <span className="capitalize">{training.type}</span>
+            <div className="space-y-3 text-sm mb-4">
+              <div className="flex justify-between items-center">
+                <span className="text-muted-foreground">Type:</span>
+                <span className="font-medium capitalize text-foreground">{training.type}</span>
               </div>
-              <div className="flex justify-between">
-                <span>Duration:</span>
-                <span>
+              <div className="flex justify-between items-center">
+                <span className="text-muted-foreground">Duration:</span>
+                <span className="font-medium text-foreground">
                   {new Date(training.startDate).toLocaleDateString()} -{" "}
                   {new Date(training.endDate).toLocaleDateString()}
                 </span>
               </div>
-              <div className="flex justify-between">
-                <span>Participants:</span>
-                <span>
+              <div className="flex justify-between items-center">
+                <span className="text-muted-foreground">Participants:</span>
+                <span className="font-medium text-foreground">
                   {training.participants.length}/{training.maxParticipants}
                 </span>
               </div>
               {training.instructor && (
-                <div className="flex justify-between">
-                  <span>Instructor:</span>
-                  <span>{training.instructor}</span>
+                <div className="flex justify-between items-center">
+                  <span className="text-muted-foreground">Instructor:</span>
+                  <span className="font-medium text-foreground">{training.instructor}</span>
                 </div>
               )}
             </div>
@@ -185,21 +200,25 @@ export default function TrainingPage() {
                         className="flex items-center justify-between"
                       >
                         <span className="text-sm">{participant.employeeId}</span>
-                        <select
-                          className="text-sm border rounded-md p-1"
+                        <Select
                           value={participant.status}
-                          onChange={(e) =>
+                          onValueChange={(value) =>
                             handleUpdateStatus(
                               training.id,
                               participant.employeeId,
-                              e.target.value as any
+                              value as any
                             )
                           }
                         >
-                          <option value="enrolled">Enrolled</option>
-                          <option value="completed">Completed</option>
-                          <option value="dropped">Dropped</option>
-                        </select>
+                          <SelectTrigger className="w-[130px] h-8 text-xs">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="enrolled">Enrolled</SelectItem>
+                            <SelectItem value="completed">Completed</SelectItem>
+                            <SelectItem value="dropped">Dropped</SelectItem>
+                          </SelectContent>
+                        </Select>
                       </div>
                     ))}
                   </div>
@@ -231,12 +250,17 @@ export default function TrainingPage() {
             </div>
             <div>
               <Label>Type</Label>
-              <select name="type" className="w-full p-2 border rounded-md">
-                <option value="internal">Internal</option>
-                <option value="external">External</option>
-                <option value="certification">Certification</option>
-                <option value="workshop">Workshop</option>
-              </select>
+              <Select name="type" defaultValue="internal">
+                <SelectTrigger className="w-full">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="internal">Internal</SelectItem>
+                  <SelectItem value="external">External</SelectItem>
+                  <SelectItem value="certification">Certification</SelectItem>
+                  <SelectItem value="workshop">Workshop</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
             <div>
               <Label>Start Date</Label>
